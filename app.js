@@ -17,12 +17,14 @@ const middleware = [
 app.use(middleware);
 
 app.get("/", (request, response) => {
+  response.render("pages/auth/signup", { title: "Create A New Account" });
+
   response.json({
     message: "Hello Bloggers",
   });
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
