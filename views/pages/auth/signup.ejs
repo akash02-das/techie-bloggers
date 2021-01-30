@@ -1,10 +1,31 @@
 <%- include('../../partials/header.ejs') %>
 
     <div class="container my-4">
-        <div class="bg-primary p-4">
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, exercitationem.</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel rerum, ex aut doloremque assumenda sapiente
-                voluptas architecto maxime doloribus alias.</p>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card card-body">
+                    <h4 class="mb-4 text-primary">Create A New Account</h4>
+                    <form action="/auth/signup" method="POST">
+                        <div class="form-group mb-3">
+                            <label for="username" class="form-label">Enter Your Username (Must be unique)</label>
+                            <input type="text" name="username" id="username" class="form-control">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label">Enter A Valid Email</label>
+                            <input type="email" name="email" id="email" class="form-control">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Enter A Strong Password</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Your Password</label>
+                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Signup">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
