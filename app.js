@@ -1,6 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
 
+// Import Routes
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
 
 // View Engine
@@ -16,9 +19,9 @@ const middleware = [
 ];
 app.use(middleware);
 
-app.get("/", (request, response) => {
-  response.render("pages/auth/signup", { title: "Create A New Account" });
+app.use("/auth", authRoutes);
 
+app.get("/", (request, response) => {
   response.json({
     message: "Hello Bloggers",
   });

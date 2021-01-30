@@ -10,26 +10,3 @@ body {
   font-size: 16px;
   background: rgb(245, 245, 245);
 }
-
-/* ################ Footer ################# */
-footer {
-  position: absolute;
-  bottom: 0;
-}
-
-.footer {
-  width: 100vw;
-  height: 60px;
-  padding: 20px 0;
-}
-
-.footer p {
-  word-spacing: 2px;
-  text-transform: capitalize;
-}
-
-.footer span {
-  font-weight: bold;
-  opacity: 0.7;
-}
-/* ################ End of Footer ################# */

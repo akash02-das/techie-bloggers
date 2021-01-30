@@ -1,9 +1,30 @@
-exports.signupGetController = (req, res, next) => {};
+const User = require("../models/User");
 
-exports.signupPostController = (req, res, next) => {};
+exports.signupGetController = (request, response, next) => {
+  response.render("pages/auth/signup", { title: "Create a new account" });
+};
 
-exports.loginGetController = (req, res, next) => {};
+exports.signupPostController = async (request, response, next) => {
+  let { username, email, password } = request.body;
 
-exports.loginPostController = (req, res, next) => {};
+  let user = new User({
+    username,
+    email,
+    password,
+  });
 
-exports.logoutController = (req, res, next) => {};
+  try {
+    let createdUser = await user.save();
+    console.log("User created successfully", createdUser);
+    response.render("pages/auth/signup", { title: "Create a new account" });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+exports.loginGetController = (request, response, next) => {};
+
+exports.loginPostController = (request, response, next) => {};
+
+exports.logoutController = (request, response, next) => {};
