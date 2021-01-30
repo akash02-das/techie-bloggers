@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const mongoose = require("mongoose");
 
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
@@ -28,7 +29,17 @@ app.get("/", (request, response) => {
 });
 
 const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on PORT ${PORT}`);
-});
+mongoose
+  .connect(
+    "mongodb+srv://akash-das02:aku02111993@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
+  )
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Database Connected!");
+      console.log(`Server is running on PORT ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    return console.log(error);
+  });
