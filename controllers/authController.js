@@ -26,7 +26,9 @@ exports.signupPostController = async (request, response, next) => {
   }
 };
 
-exports.loginGetController = (request, response, next) => {};
+exports.loginGetController = (request, response, next) => {
+  response.render("pages/auth/login", { title: "Login to your account" });
+};
 
 exports.loginPostController = (request, response, next) => {};
 

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="card card-body">
-                    <h4 class="mb-4 text-primary">Create A New Account</h4>
+                    <h4 class="mb-4 text-primary">Create a new account</h4>
                     <form action="/auth/signup" method="POST">
                         <div class="form-group mb-3">
                             <label for="username" class="form-label">Enter your username (Must be unique)</label>
@@ -25,8 +25,11 @@
                             <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
                                 placeholder="Enter password">
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Signup">
+                        <input type="submit" class="btn btn-primary" value="Sign up">
                     </form>
+                    <a href="/auth/login" class="my-3 text-center">
+                        Already have an account? Login here
+                    </a>
                 </div>
             </div>
         </div>
