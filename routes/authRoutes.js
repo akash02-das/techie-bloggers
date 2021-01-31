@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { body, validationResult } = require("express-validator");
+const { body } = require("express-validator");
 const User = require("../models/User");
 
 const {
@@ -26,8 +26,8 @@ const signupValidator = [
     .isEmail()
     .withMessage("Please provide a valid email")
     .custom(async (email) => {
-      let email = await User.findOne({ email });
-      if (email) {
+      let user = await User.findOne({ email });
+      if (user) {
         return Promise.reject("Email already is used");
       }
     })
@@ -37,15 +37,19 @@ const signupValidator = [
     .isLength({ min: 5 })
     .withMessage("Password must be greater than 5 characters"),
 
-  body("confirmPassword").custom((confirmPassword, { req }) => {
-    if (confirmPassword !== req.body.password) {
-      throw new Error("Password does not match");
-    }
-  }),
+  body("confirmPassword")
+    .isLength({ min: 5 })
+    .withMessage("Password must be greater than 5 characters")
+    .custom((confirmPassword, { req }) => {
+      if (confirmPassword !== req.body.password) {
+        throw new Error("Password does not match");
+      }
+      return true;
+    }),
 ];
 
-router.get("/signup", signupValidator, signupGetController);
-router.post("/signup", signupPostController);
+router.get("/signup", signupGetController);
+router.post("/signup", signupValidator, signupPostController);
 router.get("/login", loginGetController);
 router.post("/login", loginPostController);
 router.get("/logout", logoutController);

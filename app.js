@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 8080;
 mongoose
   .connect(
     "mongodb+srv://akash-das02:aku02111993@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority",
-    { useNewUrlParser: true }
+    { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
     app.listen(PORT, () => {
