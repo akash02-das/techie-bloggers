@@ -8,19 +8,21 @@ exports.signupGetController = (request, response, next) => {
   response.render("pages/auth/signup", {
     title: "Create a new account",
     error: {},
+    value: {},
   });
 };
 
 exports.signupPostController = async (request, response, next) => {
+  let { username, email, password } = request.body;
+
   let errors = validationResult(request).formatWith(errorFormatter);
   if (!errors.isEmpty()) {
     return response.render("pages/auth/signup", {
       title: "Create a new account",
       error: errors.mapped(),
+      value: { username, email, password },
     });
   }
-
-  let { username, email, password } = request.body;
 
   try {
     let hashedPassword = await bcrypt.hash(password, 11);
