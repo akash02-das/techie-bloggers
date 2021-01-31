@@ -43,11 +43,22 @@ exports.signupPostController = async (request, response, next) => {
 };
 
 exports.loginGetController = (request, response, next) => {
-  response.render("pages/auth/login", { title: "Login to your account" });
+  response.render("pages/auth/login", {
+    title: "Login to your account",
+    error: {},
+  });
 };
 
 exports.loginPostController = async (request, response, next) => {
   let { email, password } = request.body;
+
+  let errors = validationResult(request).formatWith(errorFormatter);
+  if (!errors.isEmpty()) {
+    return response.render("pages/auth/login", {
+      title: "Login to your account",
+      error: errors.mapped(),
+    });
+  }
 
   try {
     let user = await User.findOne({ email });
