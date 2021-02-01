@@ -43,6 +43,8 @@ exports.signupPostController = async (request, response, next) => {
 };
 
 exports.loginGetController = (request, response, next) => {
+  console.log(request.session.isLoggedIn, request.session.user);
+
   response.render("pages/auth/login", {
     title: "Login to your account",
     error: {},
@@ -70,6 +72,9 @@ exports.loginPostController = async (request, response, next) => {
     if (!match) {
       return response.json({ message: "Invalid Credential" });
     }
+
+    request.session.isLoggedIn = true;
+    request.session.user = user;
 
     response.render("pages/auth/login", {
       title: "Login to your account",
