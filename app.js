@@ -9,7 +9,9 @@ const authRoutes = require("./routes/authRoutes");
 
 // Import Middleware
 const { bindUserWithRequest } = require("./middlewares/authMiddleware");
+const setLocals = require("./middlewares/setLocals");
 
+// Sessions Store
 const MONGODB_URI =
   "mongodb+srv://akash-das02:aku02111993@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority";
 const store = new MongoDBStore({
@@ -37,6 +39,7 @@ const middleware = [
     store: store,
   }),
   bindUserWithRequest(),
+  setLocals(),
 ];
 app.use(middleware);
 
