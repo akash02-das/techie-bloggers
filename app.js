@@ -7,6 +7,9 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
 
+// Import Middleware
+const { bindUserWithRequest } = require("./middlewares/authMiddleware");
+
 const MONGODB_URI =
   "mongodb+srv://akash-das02:aku02111993@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority";
 const store = new MongoDBStore({
@@ -33,6 +36,7 @@ const middleware = [
     saveUninitialized: false,
     store: store,
   }),
+  bindUserWithRequest(),
 ];
 app.use(middleware);
 
