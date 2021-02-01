@@ -2,9 +2,18 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
+
+const MONGODB_URI =
+  "mongodb+srv://akash-das02:aku02111993@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority";
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: "sessions",
+  expires: 1000 * 60 * 60 * 24,
+});
 
 const app = express();
 
@@ -22,6 +31,7 @@ const middleware = [
     secret: process.env.SECRET_KEY || "SECRET_KEY",
     resave: false,
     saveUninitialized: false,
+    store: store,
   }),
 ];
 app.use(middleware);
@@ -36,10 +46,7 @@ app.get("/", (request, response) => {
 
 const PORT = process.env.PORT || 8080;
 mongoose
-  .connect(
-    "mongodb+srv://akash-das02:aku02111993@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log("Database Connected!");
