@@ -31,7 +31,7 @@
                         <input type="submit" class="btn btn-primary" value="Log in">
                     </form>
 
-                    <a href="/auth/signup" class="my-3 text-center">
+                    <a href="/auth/signup" class="my-3 text-center card-link">
                         Don't have an account? Create one
                     </a>
                 </div>
@@ -40,6 +40,7 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="bg-dark text-light position-absolute bottom-0 w-100">
         <div style="width: 100%; height: 60px; padding: 20px 0;">
             <p class="text-center text-break fs-6" style="word-spacing: 2px; letter-spacing: 2px;">
@@ -48,7 +49,11 @@
             </p>
         </div>
     </footer>
+    <!-- End of Footer -->
 
-    </body>
+    <!-- Bootstrap JS -->
+    <%- include('../../partials/bootstrapCdnJs.ejs') %>
 
-    </html>
+        </body>
+
+        </html>

@@ -71,8 +71,10 @@ exports.loginPostController = async (request, response, next) => {
       return response.json({ message: "Invalid Credential" });
     }
 
-    console.log("Successfully Logged In", user);
-    response.render("pages/auth/login", { title: "Login to your account" });
+    response.render("pages/auth/login", {
+      title: "Login to your account",
+      error: {},
+    });
   } catch (error) {
     console.log(error);
     next(error);
