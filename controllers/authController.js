@@ -75,10 +75,12 @@ exports.loginPostController = async (request, response, next) => {
 
     request.session.isLoggedIn = true;
     request.session.user = user;
-
-    response.render("pages/auth/login", {
-      title: "Login to your account",
-      error: {},
+    request.session.save((error) => {
+      if (error) {
+        console.log(error);
+        return next(error);
+      }
+      response.redirect("/dashboard");
     });
   } catch (error) {
     console.log(error);
@@ -86,4 +88,12 @@ exports.loginPostController = async (request, response, next) => {
   }
 };
 
-exports.logoutController = (request, response, next) => {};
+exports.logoutController = (request, response, next) => {
+  request.session.destroy((error) => {
+    if (error) {
+      console.log(error);
+      return next(error);
+    }
+    return response.redirect("/auth/login");
+  });
+};
