@@ -1,3 +1,4 @@
+const { request, response } = require("express");
 const User = require("../models/User");
 
 exports.bindUserWithRequest = () => {
@@ -15,4 +16,12 @@ exports.bindUserWithRequest = () => {
       next(error);
     }
   };
+};
+
+exports.isAuthenticated = (request, response, next) => {
+  if (!request.session.isLoggedIn) {
+    return response.redirect("/auth/login");
+  }
+
+  next();
 };
