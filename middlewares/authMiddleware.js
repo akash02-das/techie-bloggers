@@ -25,3 +25,11 @@ exports.isAuthenticated = (request, response, next) => {
 
   next();
 };
+
+exports.isUnAuthenticated = (request, response, next) => {
+  if (request.session.isLoggedIn) {
+    return response.redirect("/dashboard");
+  }
+
+  next();
+};
