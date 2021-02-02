@@ -6,6 +6,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
+const dashboardRoute = require("./routes/dashboardRoute");
 
 // Import Middleware
 const { bindUserWithRequest } = require("./middlewares/authMiddleware");
@@ -44,6 +45,7 @@ const middleware = [
 app.use(middleware);
 
 app.use("/auth", authRoutes);
+app.use("/dashboard", dashboardRoute);
 
 app.get("/", (request, response) => {
   response.json({
