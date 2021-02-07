@@ -1,11 +1,13 @@
 require("dotenv").config();
 
+// Import Packages
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
+const config = require("config");
 
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
@@ -16,7 +18,9 @@ const { bindUserWithRequest } = require("./middlewares/authMiddleware");
 const setLocals = require("./middlewares/setLocals");
 
 // Sessions Store
-const MONGODB_URI = `mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASSWORD}@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://${config.get("db-username")}:${config.get(
+  "db-password"
+)}@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority`;
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions",
@@ -39,7 +43,7 @@ const middleware = [
   express.urlencoded({ extended: true }),
   express.json(),
   session({
-    secret: process.env.SECRET_KEY || "SECRET_KEY",
+    secret: config.get("secret"),
     resave: false,
     saveUninitialized: false,
     store: store,
