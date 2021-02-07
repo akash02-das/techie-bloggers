@@ -24,13 +24,16 @@ const store = new MongoDBStore({
 
 const app = express();
 
+if (app.get("env").toLowerCase() === "development") {
+  app.use(morgan("dev"));
+}
+
 // View Engine
 app.set("view engine", "ejs");
 app.set("views", "views");
 
 // Middleware Array
 const middleware = [
-  morgan("dev"),
   express.static("public"),
   express.urlencoded({ extended: true }),
   express.json(),
