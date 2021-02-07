@@ -3,12 +3,14 @@ const { validationResult } = require("express-validator");
 
 const User = require("../models/User");
 const errorFormatter = require("../utils/validationErrorFormatter");
+const Flash = require("../utils/Flash");
 
 exports.signupGetController = (request, response, next) => {
   response.render("pages/auth/signup", {
     title: "Create a new account",
     error: {},
     value: {},
+    flashMessage: Flash.getMessage(request),
   });
 };
 
@@ -16,11 +18,15 @@ exports.signupPostController = async (request, response, next) => {
   let { username, email, password } = request.body;
 
   let errors = validationResult(request).formatWith(errorFormatter);
+
   if (!errors.isEmpty()) {
+    request.flash("fail", "Please check your form");
+
     return response.render("pages/auth/signup", {
       title: "Create a new account",
       error: errors.mapped(),
       value: { username, email, password },
+      flashMessage: Flash.getMessage(request),
     });
   }
 
@@ -33,9 +39,9 @@ exports.signupPostController = async (request, response, next) => {
       password: hashedPassword,
     });
 
-    let createdUser = await user.save();
-    console.log("User created successfully", createdUser);
-    response.render("pages/auth/signup", { title: "Create a new account" });
+    await user.save();
+    request.flash("success", "User created successfully");
+    response.redirect("/auth/login");
   } catch (error) {
     console.log(error);
     next(error);
@@ -43,11 +49,10 @@ exports.signupPostController = async (request, response, next) => {
 };
 
 exports.loginGetController = (request, response, next) => {
-  console.log(request.session.isLoggedIn, request.session.user);
-
   response.render("pages/auth/login", {
     title: "Login to your account",
     error: {},
+    flashMessage: Flash.getMessage(request),
   });
 };
 
@@ -55,22 +60,38 @@ exports.loginPostController = async (request, response, next) => {
   let { email, password } = request.body;
 
   let errors = validationResult(request).formatWith(errorFormatter);
+
   if (!errors.isEmpty()) {
+    request.flash("fail", "Please check your form");
+
     return response.render("pages/auth/login", {
       title: "Login to your account",
       error: errors.mapped(),
+      flashMessage: Flash.getMessage(request),
     });
   }
 
   try {
     let user = await User.findOne({ email });
     if (!user) {
-      return response.json({ message: "Invalid Credential" });
+      request.flash("fail", "Please provide valid credentials");
+
+      return response.render("pages/auth/login", {
+        title: "Login to your account",
+        error: {},
+        flashMessage: Flash.getMessage(request),
+      });
     }
 
     let match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return response.json({ message: "Invalid Credential" });
+      request.flash("fail", "Please provide valid credentials");
+
+      return response.render("pages/auth/login", {
+        title: "Login to your account",
+        error: {},
+        flashMessage: Flash.getMessage(request),
+      });
     }
 
     request.session.isLoggedIn = true;
@@ -80,6 +101,8 @@ exports.loginPostController = async (request, response, next) => {
         console.log(error);
         return next(error);
       }
+      request.flash("success", "Successfully logged in");
+
       response.redirect("/dashboard");
     });
   } catch (error) {
@@ -94,6 +117,8 @@ exports.logoutController = (request, response, next) => {
       console.log(error);
       return next(error);
     }
-    return response.redirect("/auth/login");
+    request.flash("success", "Successfully logout");
+
+    response.redirect("/auth/login");
   });
 };
