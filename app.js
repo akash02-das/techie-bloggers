@@ -10,8 +10,7 @@ const flash = require("connect-flash");
 const config = require("config");
 
 // Import Routes
-const authRoutes = require("./routes/authRoutes");
-const dashboardRoute = require("./routes/dashboardRoute");
+const setRoutes = require("./routes/appRoutes");
 
 // Import Middleware
 const { bindUserWithRequest } = require("./middlewares/authMiddleware");
@@ -54,14 +53,8 @@ const middleware = [
 ];
 app.use(middleware);
 
-app.use("/auth", authRoutes);
-app.use("/dashboard", dashboardRoute);
-
-app.get("/", (request, response) => {
-  response.json({
-    message: "Hello Bloggers",
-  });
-});
+// Using Routes from Routes Directory
+setRoutes(app);
 
 const PORT = process.env.PORT || 8080;
 mongoose
