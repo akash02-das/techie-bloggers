@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
@@ -14,8 +16,7 @@ const { bindUserWithRequest } = require("./middlewares/authMiddleware");
 const setLocals = require("./middlewares/setLocals");
 
 // Sessions Store
-const MONGODB_URI =
-  "mongodb+srv://akash-das02:aku02111993@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority";
+const MONGODB_URI = `mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASSWORD}@techie-bloggers.bdrwo.mongodb.net/techie-bloggers?retryWrites=true&w=majority`;
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions",
