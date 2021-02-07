@@ -22,6 +22,10 @@ const routes = [
 
 module.exports = (app) => {
   routes.forEach((route) => {
-    app.use(route.path, route.handler);
+    if (route.path === "/") {
+      app.get(route.path, route.handler);
+    } else {
+      app.use(route.path, route.handler);
+    }
   });
 };

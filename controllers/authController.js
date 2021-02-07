@@ -43,7 +43,6 @@ exports.signupPostController = async (request, response, next) => {
     request.flash("success", "User created successfully");
     response.redirect("/auth/login");
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -106,7 +105,6 @@ exports.loginPostController = async (request, response, next) => {
       response.redirect("/dashboard");
     });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -114,7 +112,6 @@ exports.loginPostController = async (request, response, next) => {
 exports.logoutController = (request, response, next) => {
   request.session.destroy((error) => {
     if (error) {
-      console.log(error);
       return next(error);
     }
     request.flash("success", "Successfully logout");
