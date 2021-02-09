@@ -36,6 +36,7 @@ app.use((error, request, response, next) => {
   if (error.status === 404) {
     return response.render("pages/error/404", { flashMessage: {} });
   }
+  console.log(chalk.red.inverse(error.message));
   console.log(error);
   response.render("pages/error/500", { flashMessage: {} });
 });
