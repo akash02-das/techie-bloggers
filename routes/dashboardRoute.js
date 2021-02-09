@@ -3,14 +3,18 @@ const { isAuthenticated } = require("../middlewares/authMiddleware");
 
 const {
   dashboardGetController,
+  createProfileGetController,
+  createProfilePostController,
+  editProfileGetController,
+  editProfilePostController,
 } = require("../controllers/dashboardController");
 
 router.get("/", isAuthenticated, dashboardGetController);
 
-router.get("/create-profile");
-router.post("/create-profile");
+router.get("/create-profile", isAuthenticated, createProfileGetController);
+router.post("/create-profile", isAuthenticated, createProfilePostController);
 
-router.get("/edit-profile");
-router.post("/edit-profile");
+router.get("/edit-profile", isAuthenticated, editProfileGetController);
+router.post("/edit-profile", isAuthenticated, editProfilePostController);
 
 module.exports = router;

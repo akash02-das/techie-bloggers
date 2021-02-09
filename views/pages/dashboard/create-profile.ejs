@@ -1,0 +1,117 @@
+<%- include('../../partials/header.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card card-body my-3">
+                            <h4 class="text-primary">
+                                <%= title %>
+                            </h4>
+
+                            <div class="profile-pics">
+                                <img src="<%= user.profilePics %> " alt="Profile Pics" class="img-thumbnail img-fluid"
+                                    id="profilePics">
+
+                                <form action="/uploads/profilePics" class="my-2" id="profilePicsForm">
+
+                                    <div class="input-group my-3">
+                                        <input type="file" class="form-control" name="profilePics" id="profilePicsFile"
+                                            accept="image/*">
+                                        <label class="input-group-text" for="profilePicsFile">Upload</label>
+                                    </div>
+
+                                    <input type="button" value="Remove Pics" id="removeProfilePics"
+                                        class="btn btn-danger btn-sm my-2"
+                                        style="display: <%= user.profilePics.includes('default.png') ? 'none' : 'block' %>">
+                                </form>
+                            </div>
+
+                            <div>
+                                <form action="/dashboard/create-profile" method="POST">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Name</span>
+                                        <input type="text" class="form-control" name="name"
+                                            placeholder="Enter your name" aria-label="Name">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Email</span>
+                                        <input type="email" class="form-control" name="email" value="<%= user.email %> "
+                                            placeholder="Enter your email" aria-label="Email" disabled>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Title</span>
+                                        <input type="text" class="form-control" name="title"
+                                            placeholder="Enter a short title" aria-label="Title">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Short bio</span>
+                                        <textarea name="bio" class="form-control" placeholder="Enter a short bio"
+                                            aria-label="Short bio"></textarea>
+                                    </div>
+
+                                    <div>
+                                        <p class="lead">Your social links</p>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">
+                                                <i class="fab fa-internet-explorer"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name="website"
+                                                placeholder="Website link">
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">
+                                                <i class="fab fa-facebook-square"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name="facebook"
+                                                placeholder="Facebook link">
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">
+                                                <i class="fab fa-twitter-square"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name="twitter"
+                                                placeholder="Twitter link">
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">
+                                                <i class="fab fa-linkedin"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name="linkedIn"
+                                                placeholder="LinkedIn link">
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">
+                                                <i class="fab fa-github"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name="github"
+                                                placeholder="Github link">
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn btn-primary my-2" value="Create Profile">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <%- include('../../partials/footer.ejs') %>
+
+        <!-- Bootstrap JS -->
+        <%- include('../../partials/bootstrapCdnJs.ejs') %>
+
+            </body>
+
+            </html>

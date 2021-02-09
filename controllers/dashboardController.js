@@ -32,3 +32,15 @@ exports.createProfileGetController = async (request, response, next) => {
     next(error);
   }
 };
+
+exports.createProfilePostController = (request, response, next) => {
+  next();
+};
+
+exports.editProfileGetController = (request, response, next) => {
+  next();
+};
+
+exports.editProfilePostController = (request, response, next) => {
+  next();
+};
