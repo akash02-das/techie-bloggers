@@ -4,6 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const config = require("config");
+const chalk = require("chalk");
 
 const setMiddleware = require("./middlewares/middlewares");
 const setRoutes = require("./routes/appRoutes");
@@ -44,8 +45,8 @@ mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(PORT, () => {
-      console.log("Database Connected!");
-      console.log(`Server is running on PORT ${PORT}`);
+      console.log(chalk.bold.blue.inverse("Database Connected!"));
+      console.log(chalk.green.inverse(`Server is running on PORT ${PORT}`));
     });
   })
   .catch((error) => {
