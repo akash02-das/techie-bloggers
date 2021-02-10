@@ -114,8 +114,6 @@ exports.logoutController = (request, response, next) => {
     if (error) {
       return next(error);
     }
-    request.flash("success", "Successfully logout");
-
     response.redirect("/auth/login");
   });
 };
