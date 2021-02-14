@@ -1,9 +1,7 @@
-const { request, response } = require("express");
-
 module.exports = () => {
-  return (request, response, next) => {
-    response.locals.user = request.user;
-    response.locals.isLoggedIn = request.session.isLoggedIn;
+  return (req, res, next) => {
+    res.locals.user = req.user || {};
+    res.locals.isLoggedIn = req.session.isLoggedIn || false;
 
     next();
   };

@@ -1,15 +1,14 @@
-const { request, response } = require("express");
 const User = require("../models/User");
 
 exports.bindUserWithRequest = () => {
-  return async (request, response, next) => {
-    if (!request.session.isLoggedIn) {
+  return async (req, res, next) => {
+    if (!req.session.isLoggedIn) {
       return next();
     }
 
     try {
-      let user = await User.findById(request.session.user._id);
-      request.user = user;
+      let user = await User.findById(req.session.user._id);
+      req.user = user;
       next();
     } catch (error) {
       console.log(error);
@@ -18,17 +17,17 @@ exports.bindUserWithRequest = () => {
   };
 };
 
-exports.isAuthenticated = (request, response, next) => {
-  if (!request.session.isLoggedIn) {
-    return response.redirect("/auth/login");
+exports.isAuthenticated = (req, res, next) => {
+  if (!req.session.isLoggedIn) {
+    return res.redirect("/auth/login");
   }
 
   next();
 };
 
-exports.isUnAuthenticated = (request, response, next) => {
-  if (request.session.isLoggedIn) {
-    return response.redirect("/dashboard");
+exports.isUnAuthenticated = (req, res, next) => {
+  if (req.session.isLoggedIn) {
+    return res.redirect("/dashboard");
   }
 
   next();

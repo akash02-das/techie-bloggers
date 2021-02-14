@@ -1,46 +1,46 @@
 const Flash = require("../utils/Flash");
 const Profile = require("../models/Profile");
 
-exports.dashboardGetController = async (request, response, next) => {
+exports.dashboardGetController = async (req, res, next) => {
   try {
-    let profile = await Profile.findOne({ user: request.user._id });
+    let profile = await Profile.findOne({ user: req.user._id });
     if (profile) {
-      return response.render("pages/dashboard/dashboard", {
+      return res.render("pages/dashboard/dashboard", {
         title: "My dashboard",
-        flashMessage: Flash.getMessage(request),
+        flashMessage: Flash.getMessage(req),
       });
     }
 
-    response.redirect("/dashboard/create-profile");
+    res.redirect("/dashboard/create-profile");
   } catch (error) {
     next(error);
   }
 };
 
-exports.createProfileGetController = async (request, response, next) => {
+exports.createProfileGetController = async (req, res, next) => {
   try {
-    let profile = await Profile.findOne({ user: request.user._id });
+    let profile = await Profile.findOne({ user: req.user._id });
     if (profile) {
-      return response.redirect("/dashboard/edit-profile");
+      return res.redirect("/dashboard/edit-profile");
     }
 
-    response.render("pages/dashboard/create-profile", {
+    res.render("pages/dashboard/create-profile", {
       title: "Create your profile",
-      flashMessage: Flash.getMessage(request),
+      flashMessage: Flash.getMessage(req),
     });
   } catch (error) {
     next(error);
   }
 };
 
-exports.createProfilePostController = (request, response, next) => {
+exports.createProfilePostController = (req, res, next) => {
   next();
 };
 
-exports.editProfileGetController = (request, response, next) => {
+exports.editProfileGetController = (req, res, next) => {
   next();
 };
 
-exports.editProfilePostController = (request, response, next) => {
+exports.editProfilePostController = (req, res, next) => {
   next();
 };

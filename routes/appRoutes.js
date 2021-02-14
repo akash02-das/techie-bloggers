@@ -17,8 +17,8 @@ const routes = [
   },
   {
     path: "/",
-    handler: (request, response) => {
-      response.json({
+    handler: (req, res) => {
+      res.json({
         message: "Hello Bloggers",
       });
     },

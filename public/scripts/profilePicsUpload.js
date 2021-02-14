@@ -55,6 +55,8 @@ window.onload = function () {
         });
         return fetch(req);
       })
+      // .then((res) => res.text())
+      // .then((text) => console.log(text))
       .then((res) => res.json())
       .then((data) => {
         document.getElementById("removeProfilePics").style.display = "block";
