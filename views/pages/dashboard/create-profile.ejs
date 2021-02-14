@@ -16,7 +16,8 @@
                                 <img src="<%= user.profilePics %>" alt="Profile Pics" class="img-thumbnail img-fluid"
                                     id="profilePics">
 
-                                <form action="/uploads/profilePics" class="my-2" id="profilePicsForm">
+                                <form action="/uploads/profilePics" method="POST" enctype="multipart/form-data"
+                                    class="my-2" id="profilePicsForm">
                                     <div class="form-group my-3">
                                         <input type="file" class="form-control" name="profilePics" id="profilePicsFile"
                                             accept="image/*" data-bs-toggle="modal" data-bs-target="#crop-modal">
@@ -32,8 +33,11 @@
                                 <form action="/dashboard/create-profile" method="POST">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Name</span>
-                                        <input type="text" class="form-control" name="name"
-                                            placeholder="Enter your name" aria-label="Name">
+                                        <input type="text" class="form-control <%= error.name ? 'is-invalid' : '' %>"
+                                            name="name" placeholder="Enter your name" aria-label="Name">
+                                        <div class="invalid-feedback">
+                                            <%= error.name %>
+                                        </div>
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Email</span>
@@ -42,13 +46,19 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Title</span>
-                                        <input type="text" class="form-control" name="title"
-                                            placeholder="Enter a short title" aria-label="Title">
+                                        <input type="text" class="form-control <%= error.title ? 'is-invalid' : '' %>"
+                                            name="title" placeholder="Enter a short title" aria-label="Title">
+                                        <div class="invalid-feedback">
+                                            <%= error.title %>
+                                        </div>
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Short bio</span>
-                                        <textarea name="bio" class="form-control" placeholder="Enter a short bio"
-                                            aria-label="Short bio"></textarea>
+                                        <textarea name="bio" class="form-control <%= error.bio ? 'is-invalid' : '' %>"
+                                            placeholder="Enter a short bio" aria-label="Short bio"></textarea>
+                                        <div class="invalid-feedback">
+                                            <%= error.bio %>
+                                        </div>
                                     </div>
 
                                     <div>
@@ -58,40 +68,60 @@
                                             <span class="input-group-text">
                                                 <i class="fab fa-internet-explorer"></i>
                                             </span>
-                                            <input type="text" class="form-control" name="website"
-                                                placeholder="Website link">
+                                            <input type="text"
+                                                class="form-control <%= error.website ? 'is-invalid' : '' %>"
+                                                name="website" placeholder="Website link">
+                                            <div class="invalid-feedback">
+                                                <%= error.website %>
+                                            </div>
                                         </div>
 
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">
                                                 <i class="fab fa-facebook-square"></i>
                                             </span>
-                                            <input type="text" class="form-control" name="facebook"
-                                                placeholder="Facebook link">
+                                            <input type="text"
+                                                class="form-control <%= error.facebook ? 'is-invalid' : '' %>"
+                                                name="facebook" placeholder="Facebook link">
+                                            <div class="invalid-feedback">
+                                                <%= error.facebook %>
+                                            </div>
                                         </div>
 
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">
                                                 <i class="fab fa-twitter-square"></i>
                                             </span>
-                                            <input type="text" class="form-control" name="twitter"
-                                                placeholder="Twitter link">
+                                            <input type="text"
+                                                class="form-control <%= error.twitter ? 'is-invalid' : '' %>"
+                                                name="twitter" placeholder="Twitter link">
+                                            <div class="invalid-feedback">
+                                                <%= error.twitter %>
+                                            </div>
                                         </div>
 
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">
                                                 <i class="fab fa-linkedin"></i>
                                             </span>
-                                            <input type="text" class="form-control" name="linkedIn"
-                                                placeholder="LinkedIn link">
+                                            <input type="text"
+                                                class="form-control <%= error.linkedIn ? 'is-invalid' : '' %>"
+                                                name="linkedIn" placeholder="LinkedIn link">
+                                            <div class="invalid-feedback">
+                                                <%= error.linkedIn %>
+                                            </div>
                                         </div>
 
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">
                                                 <i class="fab fa-github"></i>
                                             </span>
-                                            <input type="text" class="form-control" name="github"
-                                                placeholder="Github link">
+                                            <input type="text"
+                                                class="form-control <%= error.github ? 'is-invalid' : '' %>"
+                                                name="github" placeholder="Github link">
+                                            <div class="invalid-feedback">
+                                                <%= error.github %>
+                                            </div>
                                         </div>
                                     </div>
                                     <input type="submit" class="btn btn-primary my-2" value="Create Profile">
