@@ -1,10 +1,5 @@
 <%- include('../../partials/header.ejs') %>
 
-    <!-- Croppie CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
-        integrity="sha512-2eMmukTZtvwlfQoG8ztapwAH5fXaQBzaMqdljLopRSA0i6YKM8kBAOrSSykxu9NN9HrtD45lIqfONLII2AFL/Q=="
-        crossorigin="anonymous" />
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2"></div>
@@ -18,15 +13,14 @@
                             </h4>
 
                             <div class="profile-pics">
-                                <img src="<%= user.profilePics %> " alt="Profile Pics" class="img-thumbnail img-fluid"
+                                <img src="<%= user.profilePics %>" alt="Profile Pics" class="img-thumbnail img-fluid"
                                     id="profilePics">
 
-                                <form action="/uploads/profilePics" class="my-2" id="profilePicsForm">
-
-                                    <div class="input-group my-3">
+                                <form action="/uploads/profilePics" method="POST" enctype="multipart/form-data"
+                                    class="my-2" id="profilePicsForm">
+                                    <div class="form-group my-3">
                                         <input type="file" class="form-control" name="profilePics" id="profilePicsFile"
                                             accept="image/*" data-bs-toggle="modal" data-bs-target="#crop-modal">
-                                        <label class="input-group-text" for="profilePicsFile">Upload</label>
                                     </div>
 
                                     <input type="button" value="Remove Pics" id="removeProfilePics"
@@ -110,9 +104,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="crop-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="crop-modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -130,22 +122,13 @@
                 </div>
             </div>
         </div>
-        <!-- End of Modal -->
 
     </div>
 
-    <!-- Footer -->
     <%- include('../../partials/footer.ejs') %>
 
-        <!-- Bootstrap JS -->
         <%- include('../../partials/bootstrapCdnJs.ejs') %>
 
-            <!-- Croppie JS -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"
-                integrity="sha512-vUJTqeDCu0MKkOhuI83/MEX5HSNPW+Lw46BA775bAWIp1Zwgz3qggia/t2EnSGB9GoS2Ln6npDmbJTdNhHy1Yw=="
-                crossorigin="anonymous"></script>
-
-            <!-- Custom JS -->
             <script src="/scripts/profilePicsUpload.js"></script>
 
             </body>

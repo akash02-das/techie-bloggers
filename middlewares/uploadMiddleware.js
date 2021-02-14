@@ -2,11 +2,12 @@ const multer = require("multer");
 const path = require("path");
 
 const storage = multer.diskStorage({
-  destination: (request, file, callback) => {
-    callback(null, "public/uploads");
-  },
+  destination: "../public/uploads/",
   filename: (request, file, callback) => {
-    callback(null, file.fieldname + "-" + Date.now() + "-" + file.originalname);
+    callback(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
   },
 });
 
@@ -17,10 +18,10 @@ const upload = multer({
   },
   fileFilter: (request, file, callback) => {
     const types = /jpeg|jpg|png|gif/;
-    const extName = types.test(path.extname(file.originalname).toLowerCase());
-    const mimeType = types.test(file.mimetype);
+    const extname = types.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = types.test(file.mimetype);
 
-    if (extName && mimeType) {
+    if (extname && mimetype) {
       callback(null, true);
     } else {
       callback(new Error("Only support images file"));

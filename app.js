@@ -2,6 +2,7 @@ require("dotenv").config();
 
 // Import Packages
 const express = require("express");
+const ejs = require("ejs");
 const mongoose = require("mongoose");
 const config = require("config");
 const chalk = require("chalk");
