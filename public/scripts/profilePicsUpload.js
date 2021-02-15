@@ -21,7 +21,7 @@ window.onload = function () {
     reader.readAsDataURL(file);
   }
 
-  $("#profilePicsFile").on("change", function (e) {
+  $("#profilePicsFile").on("change", function () {
     if (this.files[0]) {
       readableFile(this.files[0]);
       $("#crop-modal").modal({
@@ -64,9 +64,6 @@ window.onload = function () {
         document.getElementById("profilePicsForm").reset();
 
         $("#crop-modal").modal("hide");
-        setTimeout(() => {
-          baseCropping.croppie("destroy");
-        }, 1000);
       })
       .catch((e) => {
         console.log(e);
