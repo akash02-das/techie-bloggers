@@ -114,6 +114,67 @@ exports.editProfileGetController = async (req, res, next) => {
   }
 };
 
-exports.editProfilePostController = (req, res, next) => {
-  next();
+exports.editProfilePostController = async (req, res, next) => {
+  let {
+    name,
+    title,
+    bio,
+    website,
+    facebook,
+    twitter,
+    linkedIn,
+    github,
+  } = req.body;
+
+  let errors = validationResult(req).formatWith(errorFormatter);
+  if (!errors.isEmpty()) {
+    return res.render("pages/dashboard/edit-profile", {
+      title: "Edit your profile",
+      flashMessage: Flash.getMessage(req),
+      error: errors.mapped(),
+      profile: {
+        name,
+        title,
+        bio,
+        links: {
+          website,
+          facebook,
+          twitter,
+          linkedIn,
+          github,
+        },
+      },
+    });
+  }
+
+  try {
+    let profile = {
+      name,
+      title,
+      bio,
+      links: {
+        website: website || "",
+        facebook: facebook || "",
+        twitter: twitter || "",
+        linkedIn: linkedIn || "",
+        github: github || "",
+      },
+    };
+
+    let updatedProfile = await Profile.findOneAndUpdate(
+      { user: req.user._id },
+      { $set: profile },
+      { new: true }
+    );
+
+    req.flash("success", "Profile updated successfully");
+    res.render("pages/dashboard/edit-profile", {
+      title: "Edit your profile",
+      error: {},
+      flashMessage: Flash.getMessage(req),
+      profile: updatedProfile,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
