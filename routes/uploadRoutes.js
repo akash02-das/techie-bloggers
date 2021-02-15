@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { isUnAuthenticated } = require("../middlewares/authMiddleware");
-const upload = require("../middlewares/uploadMiddleware");
+const { isUnAuthenticated } = require("../middleware/authMiddleware");
+const upload = require("../middleware/uploadMiddleware");
 const {
   uploadProfilePics,
   removeProfilePics,

@@ -10,7 +10,7 @@ const {
   logoutController,
 } = require("../controllers/authController");
 
-const { isUnAuthenticated } = require("../middlewares/authMiddleware");
+const { isUnAuthenticated } = require("../middleware/authMiddleware");
 
 router.get("/signup", isUnAuthenticated, signupGetController);
 router.post(
