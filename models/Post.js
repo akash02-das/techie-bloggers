@@ -24,7 +24,7 @@ const postSchema = new Schema(
     },
     tags: {
       type: [String],
-      required: true,
+      // required: true,
     },
     thumbnail: String,
     readTime: String,
