@@ -7,6 +7,7 @@ const {
   createPostGetController,
   createPostPostController,
   editPostGetController,
+  editPostPostController,
 } = require("../controllers/postController");
 
 router.get("/create", isAuthenticated, createPostGetController);
@@ -19,5 +20,12 @@ router.post(
 );
 
 router.get("/edit/:postId", isAuthenticated, editPostGetController);
+router.post(
+  "/edit/:postId",
+  isAuthenticated,
+  upload.single("post-thumbnail"),
+  postValidator,
+  editPostPostController
+);
 
 module.exports = router;
