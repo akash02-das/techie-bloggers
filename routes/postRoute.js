@@ -6,10 +6,10 @@ const upload = require("../middleware/uploadMiddleware");
 const {
   createPostGetController,
   createPostPostController,
+  editPostGetController,
 } = require("../controllers/postController");
 
-router.get("/create", createPostGetController);
-
+router.get("/create", isAuthenticated, createPostGetController);
 router.post(
   "/create",
   isAuthenticated,
@@ -17,5 +17,7 @@ router.post(
   postValidator,
   createPostPostController
 );
+
+router.get("/edit/:postId", isAuthenticated, editPostGetController);
 
 module.exports = router;

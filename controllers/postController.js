@@ -68,3 +68,26 @@ exports.createPostPostController = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.editPostGetController = async (req, res, next) => {
+  let postId = req.params.postId;
+
+  try {
+    let post = await Post.findOne({ author: req.user._id, _id: postId });
+
+    if (!post) {
+      let error = new Error("404 Page Not Found");
+      error.status = 404;
+      throw new Error();
+    }
+
+    res.render("pages/dashboard/post/editPost", {
+      title: "Edit your post",
+      error: {},
+      flashMessage: Flash.getMessage(req),
+      post,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
