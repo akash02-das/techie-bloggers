@@ -13,8 +13,18 @@
                             </h4>
 
                             <div class="profile-pics">
-                                <img src="<%= user.profilePics %>" alt="Profile Pics" class="img-thumbnail img-fluid"
-                                    id="profilePics">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img src="<%= user.profilePics %>" alt="Profile Pics"
+                                            class="img-thumbnail img-fluid" id="profilePics">
+                                    </div>
+
+                                    <div class="col-md-2 position-relative mb-2">
+                                        <input type="button" value="Remove Pics" id="removeProfilePics"
+                                            class="btn btn-danger btn-sm position-absolute bottom-0"
+                                            style="display: <%= user.profilePics.includes('default.png') ? 'none' : 'block' %>">
+                                    </div>
+                                </div>
 
                                 <form action="/uploads/profilePics" method="POST" enctype="multipart/form-data"
                                     class="my-2" id="profilePicsForm">
@@ -22,10 +32,6 @@
                                         <input type="file" class="form-control" name="profilePics" id="profilePicsFile"
                                             accept="image/*" data-bs-toggle="modal" data-bs-target="#crop-modal">
                                     </div>
-
-                                    <input type="button" value="Remove Pics" id="removeProfilePics"
-                                        class="btn btn-danger btn-sm my-2"
-                                        style="display: <%= user.profilePics.includes('default.png') ? 'none' : 'block' %>">
                                 </form>
                             </div>
 

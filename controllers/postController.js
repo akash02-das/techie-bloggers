@@ -91,3 +91,5 @@ exports.editPostGetController = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.editPostPostController = (req, res, next) => {};
