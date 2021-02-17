@@ -2,6 +2,7 @@ const authRoutes = require("./authRoutes");
 const dashboardRoute = require("./dashboardRoute");
 const uploadRoute = require("./uploadRoutes");
 const postRoute = require("./postRoute");
+const apiRoutes = require("../api/routes/apiRoutes");
 
 const routes = [
   {
@@ -19,6 +20,10 @@ const routes = [
   {
     path: "/posts",
     handler: postRoute,
+  },
+  {
+    path: "/api",
+    handler: apiRoutes,
   },
   {
     path: "/",
