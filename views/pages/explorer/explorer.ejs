@@ -14,7 +14,32 @@
                         class="btn <%= filter==='all' ? 'btn-primary' : 'btn-secondary' %> btn-sm">All</a>
                 </section>
                 <section>
-                    <p>There is no post</p>
+                    <% if(posts.length===0) { %>
+                        <p class="text-center text-muted">There is no posts available</p>
+                        <% } else { %>
+                            <% for(let post of posts) { %>
+                                <div class="card card-body mb-3">
+                                    <% if(post.thumbnail) { %>
+                                        <img src="<%= post.thumbnail %>" alt="<%= post.title %>" class="img-fluid mb-2">
+                                        <% } %>
+                                            <a href="/explorer/<%= post._id %>" class="card-link text-dark">
+                                                <h6>
+                                                    <%= post.title %>
+                                                </h6>
+                                                <p class="mb-4">
+                                                    <%= truncate(post.body) %>
+                                                </p>
+                                            </a>
+                                            <div class="d-flex">
+                                                <small>
+                                                    <%= moment(post.createdAt) %> |
+                                                        Posted by |
+                                                        <%= post.readTime %>
+                                                </small>
+                                            </div>
+                                </div>
+                                <% } %>
+                                    <% } %>
                 </section>
             </div>
         </div>
