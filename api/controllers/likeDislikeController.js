@@ -2,7 +2,6 @@ const Post = require("../../models/Post");
 
 exports.likesGetController = async (req, res, next) => {
   let { postId } = req.params;
-  let userId = req.user._id;
   let liked = null;
 
   if (!req.user) {
@@ -11,6 +10,7 @@ exports.likesGetController = async (req, res, next) => {
     });
   }
 
+  let userId = req.user._id;
   try {
     let post = await Post.findById(postId);
 
@@ -52,7 +52,6 @@ exports.likesGetController = async (req, res, next) => {
 
 exports.dislikesGetController = async (req, res, next) => {
   let { postId } = req.params;
-  let userId = req.user._id;
   let disliked = null;
 
   if (!req.user) {
@@ -61,6 +60,7 @@ exports.dislikesGetController = async (req, res, next) => {
     });
   }
 
+  let userId = req.user._id;
   try {
     let post = await Post.findById(postId);
 
