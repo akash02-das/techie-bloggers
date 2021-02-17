@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +8,22 @@
 
 html,
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   background: rgb(245, 245, 245);
+}
+
+.side-link {
+  list-style-type: none;
+}
+
+.side-link a {
+  text-decoration: none;
+  color: #444;
+  font-size: 17px;
+  padding: 10px 5px;
+}
+
+.side-link a:hover {
+  color: #0275d8;
 }
