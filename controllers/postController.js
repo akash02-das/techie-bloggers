@@ -161,3 +161,17 @@ exports.deletePostGetController = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.postsGetController = async (req, res, next) => {
+  try {
+    let posts = await Post.find({ author: req.user._id });
+
+    res.render("pages/dashboard/post/posts", {
+      title: "My created posts",
+      flashMessage: Flash.getMessage(req),
+      posts,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

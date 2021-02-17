@@ -1,0 +1,48 @@
+<%- include('../../../partials/header.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-10">
+                <div class="card card-body my-3">
+                    <h5 class="text-primary">List Of All My Posts</h5>
+
+                    <div class="row my-2">
+                        <% if(posts.length===0) { %>
+                            <div class="text-center text-muted">
+                                <p>There is no posts available right now</p>
+                                <a href="/posts/create" class="btn btn-primary btn-sm">Create Post</a>
+                            </div>
+                            <% } else { %>
+                                <% for(let post of posts.reverse()) { %>
+                                    <div class="card col-sm-3 text-dark bg-light m-3">
+                                        <% if(post.thumbnail) { %>
+                                            <img src="<%= post.thumbnail %> " alt="<%= post.title %> "
+                                                class="card-img-top mt-3">
+                                            <% } %>
+                                                <div class="card-body">
+                                                    <a href="/posts/edit/<%= post._id %>" class="card-link text-dark">
+                                                        <h6>
+                                                            <%= post.title %>
+                                                        </h6>
+                                                    </a>
+                                                </div>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <%- include('../../../partials/footer.ejs') %>
+
+        <%- include('../../../partials/bootstrapCdnJs.ejs') %>
+
+            </body>
+
+            </html>
