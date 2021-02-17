@@ -13,4 +13,7 @@ router.post(
   replyCommentPostController
 );
 
+router.get("/likes/:postId", isAuthenticated, (req, res) => {});
+router.get("/dislikes/:postId", isAuthenticated, (req, res) => {});
+
 module.exports = router;
