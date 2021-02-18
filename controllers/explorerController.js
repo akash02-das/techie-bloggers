@@ -45,16 +45,27 @@ exports.explorerGetController = async (req, res, next) => {
   let filter = req.query.filter || "latest";
   let { filterObj, order } = generateFilterObj(filter.toLowerCase());
 
+  let currentPage = parseInt(req.query.page) || 1;
+  let itemPerPage = 1;
+
   try {
     let posts = await Post.find(filterObj)
       .populate("author", "username")
-      .sort(order === 1 ? "-createdAt" : "createdAt");
+      .sort(order === 1 ? "-createdAt" : "createdAt")
+      .skip(itemPerPage * currentPage - itemPerPage)
+      .limit(itemPerPage);
+
+    let totalPost = await Post.countDocuments();
+    let totalPage = totalPost / itemPerPage;
 
     res.render("pages/explorer/explorer", {
       title: "Explore all posts",
       flashMessage: Flash.getMessage(req),
       filter,
       posts,
+      itemPerPage,
+      currentPage,
+      totalPage,
     });
   } catch (error) {
     next(error);
