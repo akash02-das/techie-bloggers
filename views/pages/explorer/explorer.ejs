@@ -30,7 +30,7 @@
                                                     <%= truncate(post.body) %>
                                                 </p>
                                             </a>
-                                            <div class="d-flex">
+                                            <div class="d-flex justify-content-between">
                                                 <small>
                                                     <%= moment(post.createdAt) %> |
                                                         Posted by <a href="/author/<%= post.author._id %>">
@@ -38,6 +38,18 @@
                                                         </a> |
                                                         <%= post.readTime %>
                                                 </small>
+
+                                                <% if(user) { %>
+                                                    <span class="bookmark" data-post="<%= post._id %> ">
+                                                        <% if(bookmarks.includes(post._id)) { %>
+                                                            <i class="fas fa-bookmark"></i>
+                                                            <% } else { %>
+                                                                <i class="far fa-bookmark"></i>
+                                                                <% } %>
+                                                    </span>
+                                                    <% } %>
+
+
                                             </div>
                                 </div>
                                 <% } %>
@@ -80,3 +92,10 @@
     <%- include('../../partials/footer.ejs') %>
 
         <%- include('../../partials/bootstrapCdnJs.ejs') %>
+
+            <script src="/scripts/bookmarks.js"></script>
+
+
+            </body>
+
+            </html>

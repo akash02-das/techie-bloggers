@@ -2,6 +2,8 @@ const moment = require("moment");
 const Flash = require("../utils/Flash");
 const Post = require("../models/Post");
 
+const Profile = require("../models/Profile");
+
 function genDate(days) {
   let date = moment().subtract(days, "days");
   return date.toDate();
@@ -46,7 +48,7 @@ exports.explorerGetController = async (req, res, next) => {
   let { filterObj, order } = generateFilterObj(filter.toLowerCase());
 
   let currentPage = parseInt(req.query.page) || 1;
-  let itemPerPage = 1;
+  let itemPerPage = 10;
 
   try {
     let posts = await Post.find(filterObj)
@@ -58,6 +60,14 @@ exports.explorerGetController = async (req, res, next) => {
     let totalPost = await Post.countDocuments();
     let totalPage = totalPost / itemPerPage;
 
+    let bookmarks = [];
+    if (req.user) {
+      let profile = await Profile.findOne({ user: req.user._id });
+      if (profile) {
+        bookmarks = profile.bookmarks;
+      }
+    }
+
     res.render("pages/explorer/explorer", {
       title: "Explore all posts",
       flashMessage: Flash.getMessage(req),
@@ -66,6 +76,7 @@ exports.explorerGetController = async (req, res, next) => {
       itemPerPage,
       currentPage,
       totalPage,
+      bookmarks,
     });
   } catch (error) {
     next(error);
