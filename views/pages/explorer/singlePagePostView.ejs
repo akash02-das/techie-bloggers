@@ -35,6 +35,7 @@
                                 <section>
                                     <%- post.body %>
                                 </section>
+
                                 <section class="mt-5">
                                     <% if(!user) { %>
                                         <button class="btn btn-primary btn-sm" disabled>
@@ -76,19 +77,22 @@
                                                     <% } else { %>
                                                         <% for(let comment of post.comments.reverse()) { %>
                                                             <div class="media border">
+
                                                                 <img src="<%= comment.user.profilePics %>"
-                                                                    class="rounded-circle m-3" style="width: 40px;">
-                                                                <div class="media-body my-3">
-                                                                    <p>
+                                                                    class="rounded-circle mx-3 mt-2"
+                                                                    style="width: 40px;">
+                                                                <div class="media-body">
+                                                                    <p class="mx-3 mt-2">
                                                                         <%= comment.body %>
                                                                     </p>
+
                                                                     <div name="replies">
-                                                                        <% if(comment.replies.length> 0) { %>
-                                                                            <% for(let reply of comment.replies) { %>
-                                                                                <div class="media mt-3">
-                                                                                    <img src="<%= reply.user.profilePics %> "
+                                                                        <% if (comment.replies.length> 0) { %>
+                                                                            <% for (let reply of comment.replies) { %>
+                                                                                <div class="media">
+                                                                                    <img src="<%= reply.user.profilePics %>"
                                                                                         class="align-self-start mr-3 rounded-circle"
-                                                                                        style="width: 30px;">
+                                                                                        style="width: 40px;">
                                                                                     <div class="media-body">
                                                                                         <p>
                                                                                             <%= reply.body %>
@@ -98,11 +102,12 @@
                                                                                 <% } %>
                                                                                     <% } %>
                                                                     </div>
-                                                                    <div class="my-3">
+
+                                                                    <div class="mx-3 my-2">
                                                                         <input type="text" class="form-control"
-                                                                            placeholder="Press enter to reply"
+                                                                            placeholder="Press Enter to Reply"
                                                                             name="reply"
-                                                                            data-comment="<%= comment._id %> ">
+                                                                            data-comment="<%= comment._id %>">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -124,6 +129,7 @@
 
             <script src="/scripts/bookmarks.js"></script>
             <script src="/scripts/likeDislike.js"></script>
+            <script src="/scripts/comment.js"></script>
 
 
             </body>
