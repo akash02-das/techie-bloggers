@@ -24,6 +24,7 @@ exports.searchResultGetController = async (req, res, next) => {
       currentPage,
       itemPerPage,
       totalPage,
+      posts,
     });
   } catch (error) {
     next(error);

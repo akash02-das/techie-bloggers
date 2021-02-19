@@ -43,18 +43,18 @@ window.onload = function () {
         alert(e.response.data.error);
       });
   });
-
-  function reqLikeDislike(type, postId) {
-    let headers = new Headers();
-    headers.append("Accept", "Application/JSON");
-    headers.append("Content-Type", "Application/JSON");
-
-    let req = new Request(`/api/${type}/${postId}`, {
-      method: "GET",
-      headers,
-      mode: "cors",
-    });
-
-    return fetch(req);
-  }
 };
+
+function reqLikeDislike(type, postId) {
+  let headers = new Headers();
+  headers.append("Accept", "Application/JSON");
+  headers.append("Content-Type", "Application/JSON");
+
+  let req = new Request(`/api/${type}/${postId}`, {
+    method: "GET",
+    headers,
+    mode: "cors",
+  });
+
+  return fetch(req);
+}
