@@ -1,66 +1,69 @@
 <%- include('../../partials/header.ejs') %>
 
     <div class="container my-3">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
+        <div class="row m-5">
 
-                <div class="d-flex">
+            <div class="col-md-3">
+                <img src="<%= author.profilePics %> " class="img-thumbnail img-fluid">
+            </div>
+
+            <div class="col-md-9">
+                <div>
+                    <p class="lead">
+                        <span class="text-primary">Name:</span>
+                        <%= author.profile.name %>
+                    </p>
+                    <p class="lead">
+                        <span class="text-primary">Title:</span>
+                        <%= author.profile.title %>
+                    </p>
+                    <p class="lead">
+                        <span class="text-primary">Bio:</span>
+                        <%= author.profile.bio %>
+                    </p>
+
                     <div>
-                        <img src="<%= author.profilePics %> " class="img-thumbnail img-fluid">
+                        <h5 class="text-primary">Social Links:</h5>
+                        <% if(author.profile.links.website) { %>
+                            <span class="m-2">
+                                <a href="<%= author.profile.links.website %>" target="_blank">
+                                    <i class="fab fa-internet-explorer fa-2x"></i>
+                                </a>
+                            </span>
+                            <% } %>
+                                <% if(author.profile.links.facebook) { %>
+                                    <span class="m-2">
+                                        <a href="<%= author.profile.links.facebook %>" target="_blank">
+                                            <i class="fab fa-facebook-square fa-2x"></i>
+                                        </a>
+                                    </span>
+                                    <% } %>
+                                        <% if(author.profile.links.twitter) { %>
+                                            <span class="m-2">
+                                                <a href="<%= author.profile.links.twitter %>" target="_blank">
+                                                    <i class="fab fa-twitter-square fa-2x"></i>
+                                                </a>
+                                            </span>
+                                            <% } %>
+                                                <% if(author.profile.links.linkedIn) { %>
+                                                    <span class="m-2">
+                                                        <a href="<%= author.profile.links.linkedIn %>" target="_blank">
+                                                            <i class="fab fa-linkedin fa-2x"></i>
+                                                        </a>
+                                                    </span>
+                                                    <% } %>
+                                                        <% if(author.profile.links.github) { %>
+                                                            <span class="m-2">
+                                                                <a href="<%= author.profile.links.github %>"
+                                                                    target="_blank">
+                                                                    <i class="fab fa-github fa-2x"></i>
+                                                                </a>
+                                                            </span>
+                                                            <% } %>
                     </div>
-                    <div>
-                        Name: <strong>
-                            <%= author.profile.name %>
-                        </strong>
-                        Title: <strong>
-                            <%= author.profile.title %>
-                        </strong>
-                        Bio: <p>
-                            <%= author.profile.bio %>
-                        </p>
 
-                        <div>
-                            <% if(author.profile.links.website) { %>
-                                <span>
-                                    <a href="<%= author.profile.links.website %>" target="_blank">
-                                        <i class="fab fa-internet-explorer"></i>
-                                    </a>
-                                </span>
-                                <% } %>
-                                    <% if(author.profile.links.facebook) { %>
-                                        <span>
-                                            <a href="<%= author.profile.links.facebook %>" target="_blank">
-                                                <i class="fab fa-facebook-square"></i>
-                                            </a>
-                                        </span>
-                                        <% } %>
-                                            <% if(author.profile.links.twitter) { %>
-                                                <span>
-                                                    <a href="<%= author.profile.links.twitter %>" target="_blank">
-                                                        <i class="fab fa-twitter-square"></i>
-                                                    </a>
-                                                </span>
-                                                <% } %>
-                                                    <% if(author.profile.links.linkedIn) { %>
-                                                        <span>
-                                                            <a href="<%= author.profile.links.linkedIn %>"
-                                                                target="_blank">
-                                                                <i class="fab fa-linkedin"></i>
-                                                            </a>
-                                                        </span>
-                                                        <% } %>
-                                                            <% if(author.profile.links.github) { %>
-                                                                <span>
-                                                                    <a href="<%= author.profile.links.github %>"
-                                                                        target="_blank">
-                                                                        <i class="fab fa-github"></i>
-                                                                    </a>
-                                                                </span>
-                                                                <% } %>
-                        </div>
-
-                    </div>
                 </div>
+
 
             </div>
         </div>
