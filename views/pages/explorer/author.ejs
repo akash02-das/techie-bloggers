@@ -19,7 +19,9 @@
                     </p>
                     <p class="lead">
                         <span class="text-primary">Bio:</span>
+                    <p>
                         <%= author.profile.bio %>
+                    </p>
                     </p>
 
                     <div>
@@ -61,7 +63,34 @@
                                                             </span>
                                                             <% } %>
                     </div>
+                </div>
 
+                <div class="mt-4">
+                    <h5 class="text-primary">Posts Created By This Author:</h5>
+                    <div class="row">
+                        <% if (author.profile.posts.length===0) { %>
+                            <div class="text-center text-muted">
+                                <p>There is no posts available</p>
+                                <a href="/posts/create" class="btn btn-primary btn-sm"> Create Post</a>
+                            </div>
+                            <% } else { %>
+                                <% for (let post of author.profile.posts.reverse()) { %>
+                                    <div class="card col-sm-5 m-2">
+                                        <% if (post.thumbnail) { %>
+                                            <img src="<%= post.thumbnail %>" alt="<%= post.title %>"
+                                                class="card-img-top mt-3">
+                                            <% } %>
+                                                <div class="card-body p-0">
+                                                    <a href="/explorer/<%= post._id %>" class="text-dark card-link">
+                                                        <p class="my-2">
+                                                            <%= post.title %>
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+                    </div>
                 </div>
 
 
