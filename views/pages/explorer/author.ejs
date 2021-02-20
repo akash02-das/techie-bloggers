@@ -71,7 +71,6 @@
                         <% if (author.profile.posts.length===0) { %>
                             <div class="text-center text-muted">
                                 <p>There is no posts available</p>
-                                <a href="/posts/create" class="btn btn-primary btn-sm"> Create Post</a>
                             </div>
                             <% } else { %>
                                 <% for (let post of author.profile.posts.reverse()) { %>
