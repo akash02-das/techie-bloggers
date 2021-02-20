@@ -117,3 +117,38 @@ exports.logoutController = (req, res, next) => {
     res.redirect("/auth/login");
   });
 };
+
+exports.changePasswordGetController = async (req, res, next) => {
+  res.render("pages/auth/changePassword", {
+    title: "Change my password",
+    flashMessage: Flash.getMessage(req),
+  });
+};
+
+exports.changePasswordPostController = async (req, res, next) => {
+  let { oldPassword, newPassword, confirmPassword } = req.body;
+
+  if (newPassword !== confirmPassword) {
+    req.flash("fail", "Password does not match");
+    return res.redirect("/auth/change-password");
+  }
+
+  try {
+    let match = await bcrypt.compare(oldPassword, req.user.password);
+    if (!match) {
+      req.flash("fail", "Invalid old password");
+      return res.redirect("/auth/change-password");
+    }
+
+    let hash = await bcrypt.hash(newPassword, 11);
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $set: { password: hash } }
+    );
+
+    req.flash("success", "Password updated successfully");
+    return res.redirect("/auth/change-password");
+  } catch (error) {
+    next(error);
+  }
+};

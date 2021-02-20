@@ -8,9 +8,14 @@ const {
   loginGetController,
   loginPostController,
   logoutController,
+  changePasswordGetController,
+  changePasswordPostController,
 } = require("../controllers/authController");
 
-const { isUnAuthenticated } = require("../middleware/authMiddleware");
+const {
+  isAuthenticated,
+  isUnAuthenticated,
+} = require("../middleware/authMiddleware");
 
 router.get("/signup", isUnAuthenticated, signupGetController);
 router.post(
@@ -21,6 +26,10 @@ router.post(
 );
 router.get("/login", isUnAuthenticated, loginGetController);
 router.post("/login", isUnAuthenticated, loginValidator, loginPostController);
+
+router.get("/change-password", isAuthenticated, changePasswordGetController);
+router.post("/change-password", isAuthenticated, changePasswordPostController);
+
 router.get("/logout", logoutController);
 
 module.exports = router;
