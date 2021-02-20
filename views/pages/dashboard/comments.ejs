@@ -1,0 +1,86 @@
+<%- include('../../partials/header.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card card-body my-3">
+                            <h5 class="text-primary">
+                                My Recent Comments
+                            </h5>
+
+                            <div class="mt-3" id="comment-holder">
+                                <% if(comments.length===0) { %>
+                                    <p class="text-muted text-center">There is no comment</p>
+                                    <% } else { %>
+                                        <% for(let comment of comments.reverse()) { %>
+                                            <div class="media border">
+
+                                                <p class="text-muted m-2">
+                                                    On post <strong>
+                                                        <%= comment.post.title %>
+                                                    </strong> By <a href="/author/<%= comment.user._id %> ">
+                                                        <%= comment.user.username %>
+                                                    </a>, <%= moment(comment.createdAt) %>
+                                                </p>
+
+                                                <img src="<%= comment.user.profilePics %>"
+                                                    class="rounded-circle mx-3 mt-2" style="width: 40px;">
+                                                <div class="media-body">
+
+                                                    <p class="mx-3 mt-2">
+                                                        <%= comment.body %>
+                                                    </p>
+
+                                                    <div name="replies">
+                                                        <% if (comment.replies.length> 0) { %>
+                                                            <% for (let reply of comment.replies) { %>
+                                                                <div class="media">
+                                                                    <img src="<%= reply.user.profilePics %>"
+                                                                        class="align-self-start mx-5 rounded-circle"
+                                                                        style="width: 30px;">
+                                                                    <div class="media-body mx-5">
+                                                                        <p>
+                                                                            <%= reply.body %>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <% } %>
+                                                                    <% } %>
+                                                    </div>
+
+                                                    <div class="mx-3 my-2">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Press Enter to Reply" name="reply"
+                                                            data-comment="<%= comment._id %>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                                <% } %>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <%- include('../../partials/footer.ejs') %>
+
+        <%- include('../../partials/bootstrapCdnJs.ejs') %>
+
+            <script src="/scripts/comment.js"></script>
+
+            </body>
+
+            </html>
