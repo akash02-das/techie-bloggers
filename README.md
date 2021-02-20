@@ -1,8 +1,8 @@
 # Techie Bloggers - A blog application with multiple user and user dashboard
 
-This is a multi-user blog application built using Express.js, MongoDB, mongoose, ejs etc.
+A multi-user blog application built using nodejs, expressjs, ejs template engines, MongoDB, mongoose, expression sessions, Bootstrap and lot more.
 
-# Project Specification
+## Project Specification
 
 - User can register and login
 - User can create new post, update and delete from dashboard
@@ -15,6 +15,8 @@ This is a multi-user blog application built using Express.js, MongoDB, mongoose,
 
 In the project directory, you can run:
 
-### `npm install`
+```
+npm install
 
-### `npm start`
+npm start
+```

@@ -4,7 +4,8 @@
   "description": "This is a Blog Application with multiple user and user dashboard",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "Akash Das",
   "license": "ISC",
@@ -28,5 +29,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
+  },
+  "engines": {
+    "node": "14.15.5"
   }
 }
